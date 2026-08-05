@@ -1,17 +1,27 @@
-## installation
+## **instance launch**
+* **instance type** : c7i-flex.large
+* **volume** : 30 GB
+
+## Installation 
+
+ **Java**
+```
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+java -version
+```
 
 **Jenkins**
 ````
-sudo apt update
-sudo apt install fontconfig openjdk-21-jre  -y
 sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
-  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
 echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update
 sudo apt-get install jenkins -y
 ````
+
 **Docker**
 ````
 
@@ -22,6 +32,31 @@ sudo usermod -aG docker ubuntu
 newgrp docker
 sudo chmod 777 /var/run/docker.sock
 ````
+**maven**
+```
+sudo apt install maven -y
+```
+
+---
+
+## install plugins 
+
+**settings** --> **Plugins** --> **advanc Plugins**
+* docker all
+* maven integration
+* SonarQube Scanner
+* stage view
+* Amazon ECR
+* cloudbees docker build public ...
+
+## Tools
+
+1) sonar qube init...
+2) maven
+3) docker 
+
+---
+
 **SonarQube**
 ````
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
@@ -89,7 +124,18 @@ Step5: In Jenkins
    - token:
 ![image](https://github.com/user-attachments/assets/c5d05628-1502-4a92-b722-7ad3eed5d587)
 
+## Sonarqube server 
+### administrative --> configuration --> webhook
+```
+http://publip-ip:8080/sonarqube-webhook
+```
+
 ## Restart Jenkins
+```
+sudo systemctl restart jenkins
+```
+or 
+**http://public-ip:8080/restart**
 
 ##  Create Pipeline
 ```groovy
