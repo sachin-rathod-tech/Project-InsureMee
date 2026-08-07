@@ -127,7 +127,7 @@ Step5: In Jenkins
 ## Sonarqube server 
 ### administrative --> configuration --> webhook
 ```
-http://publip-ip:8080/sonarqube-webhook
+http://publip-ip:8080/sonarqube-webhook/
 ```
 
 ## Restart Jenkins
